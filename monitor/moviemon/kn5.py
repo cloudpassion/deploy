@@ -18,6 +18,7 @@ TIMEOUT=3600*1
 
 while True:
     print('tstart')
+    quit()
     x = main_kinozal_releases()
     if x:
         deep_kinozal_releases()
