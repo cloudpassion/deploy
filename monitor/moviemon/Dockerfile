@@ -22,7 +22,8 @@ RUN chmod +x /deploy/run.sh
 # set script name and location for runtime
 
 ENV branch="${branch}"
-ENV script="test.py"
+ENV test_script="test.py"
+ENV script="kn5.py"
 
 RUN ln -s "${path}" "${branch}" && \
     cd /"${branch}" && \
