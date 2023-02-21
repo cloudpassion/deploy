@@ -10,17 +10,17 @@ echo pulling sources ...
 ls /deploy/run.sh
 
 cd /deploy && \
-    git co "${branch}" && \
+    git checkout "${branch}" && \
     git pull
 
 cd /modules && \
-    git co "${branch}" && \
+    git checkout "${branch}" && \
     git pull
 
 ls /deploy/run.sh
 echo creating workdir ...
 
-ln -s "${path}" .
+ln -s "${path}" ${branch}
 cd "/$branch"
 echo pwd:$(pwd)
 
