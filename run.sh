@@ -13,17 +13,19 @@ cd /deploy && \
 cd /modules && \
     git pull --ff-only
 
-echo creating workdir ...
+echo going to workdir ...
 cd /"$branch"
-
-#echo creating symlinks ...
-#ln -s /modules my
-echo pwd:$(pwd)
-ls -la
 
 echo updating packages ...
 pip install -r requirements.txt
 
 echo executing $script in $(python --version) ...
+
+if [ -f $test_script ]; then
+    python $test_script
+    if [ $? -ne 0 ]; then
+        echo not pass tests
+    fi
+fi
 
 python $script
