@@ -19,7 +19,9 @@ ENV path="${path}"
 # and download startup script
 RUN git clone -b "${branch}" https://github.com/cloudpassion/deploy --depth 1
 RUN git clone -b "${branch}" https://github.com/cloudpassion/modules --depth 1
+
 RUN wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh
+
 
 # create symlink in root for script dir
 RUN ln -s "${path}" . && \
