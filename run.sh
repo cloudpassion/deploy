@@ -5,7 +5,7 @@ echo path:$path
 echo branch:$branch
 echo script:$script
 
-echo update sources ...
+echo pulling sources ...
 
 cd /deploy && \
    git pull
@@ -13,13 +13,14 @@ cd /deploy && \
 cd /modules && \
    git pull
 
-cd /$branch
+echo going to workdir ...
+
+cd "/$branch"
 echo pwd:$(pwd)
 
-echo update packages ...
+echo updating packages ...
 pip install -r requirements.txt
 
-echo execute python ...
-python --version
+echo executing $script in $(python --version) ...
 
 python $script
