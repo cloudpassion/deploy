@@ -17,7 +17,7 @@ echo creating workdir ...
 ls -la
 ls -la "${branch}"
 
-ln -s "${path}" "${branch}"
+ln -s "${path}" /"${branch}"
 cd "/$branch"
 echo pwd:$(pwd)
 
