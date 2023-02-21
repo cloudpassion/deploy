@@ -32,7 +32,7 @@ ENV script="test.py"
 
 # copy settings
 COPY .secrets.yml /"${branch}"/
-COPY settings.yml /"${branch"/
+#COPY settings.yml /"${branch}"/
 
 ENTRYPOINT "/deploy/run.sh"
 
