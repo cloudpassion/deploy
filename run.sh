@@ -18,8 +18,9 @@ cd /modules && \
     git pull
 
 ls /deploy/run.sh
-echo going to workdir ...
+echo creating workdir ...
 
+ln -s "${path}" .
 cd "/$branch"
 echo pwd:$(pwd)
 
