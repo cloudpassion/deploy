@@ -15,11 +15,11 @@ cd /modules && \
 
 echo creating workdir ...
 cd /"$branch"
+
+#echo creating symlinks ...
+#ln -s /modules my
 echo pwd:$(pwd)
 ls -la
-
-echo creating symlinks ...
-ln -s /modules my
 
 echo updating packages ...
 pip install -r requirements.txt
