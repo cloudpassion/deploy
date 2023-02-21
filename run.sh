@@ -8,18 +8,16 @@ echo script:$script
 echo pulling sources ...
 
 cd /deploy && \
-    git pull
+    git pull --ff-only
 
 cd /modules && \
-    git pull
+    git pull --ff-only
 
 echo creating workdir ...
-ls -la
-ls -la "${branch}"
-
-ln -s "${path}" /"${branch}"
-cd "/$branch"
+ln -s /"${path}" /"${branch}"
+cd /"$branch"
 echo pwd:$(pwd)
+ls -la
 
 echo creating symlinks ...
 ln -s /modules my
