@@ -7,18 +7,17 @@ echo script:$script
 
 echo pulling sources ...
 
-ls /deploy/run.sh
-
 cd /deploy && \
     git pull
 
 cd /modules && \
     git pull
 
-ls /deploy/run.sh
 echo creating workdir ...
+ls -la
+ls -la "${branch}"
 
-ln -s "${path}" ${branch}
+ln -s "${path}" "${branch}"
 cd "/$branch"
 echo pwd:$(pwd)
 
