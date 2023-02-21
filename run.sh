@@ -1,12 +1,11 @@
 
-echo all:$@
-echo all2:$*
-echo 1:$1:
-echo 2:$2:
+echo variables from Dockerfile ...
 
-echo T:$TEST
-echo p:$path
-echo b:$branch
+echo path:$path
+echo branch:$branch
+echo script:$script
+
+echo update sources ...
 
 cd /deploy && \
    git pull
@@ -14,6 +13,11 @@ cd /deploy && \
 cd /modules && \
    git pull
 
-#RUN cd moviemon && \
-#    pip install -r requirements.txt
+cd $path
+echo pwd:$(pwd)
 
+echo update packages ...
+pip install -r requirements.txt
+
+echo execute python ...
+python $script
