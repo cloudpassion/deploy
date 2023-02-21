@@ -14,7 +14,6 @@ cd /modules && \
     git pull --ff-only
 
 echo creating workdir ...
-ln -s /"${path}" /"${branch}"
 cd /"$branch"
 echo pwd:$(pwd)
 ls -la
