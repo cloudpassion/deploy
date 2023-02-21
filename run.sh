@@ -10,11 +10,9 @@ echo pulling sources ...
 ls /deploy/run.sh
 
 cd /deploy && \
-    git checkout "${branch}" && \
     git pull
 
 cd /modules && \
-    git checkout "${branch}" && \
     git pull
 
 ls /deploy/run.sh
