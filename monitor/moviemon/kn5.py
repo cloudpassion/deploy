@@ -18,11 +18,12 @@ TIMEOUT=3600*1
 
 while True:
     print('tstart')
-    quit()
     x = main_kinozal_releases()
+    print('mex')
     if x:
         deep_kinozal_releases()
 
+    quit()
     time.sleep(TIMEOUT)
     break
 
