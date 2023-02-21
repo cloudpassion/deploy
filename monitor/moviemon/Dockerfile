@@ -13,6 +13,7 @@ ARG branch="moviemon"
 RUN git clone -b "${branch}" https://github.com/cloudpassion/deploy --depth 1
 RUN git clone -b "${branch}" https://github.com/cloudpassion/modules --depth 1
 
+ARG RUN=0
 RUN wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh
 RUN chmod +x /deploy/run.sh
 
