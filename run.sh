@@ -13,11 +13,13 @@ cd /deploy && \
 cd /modules && \
    git pull
 
-cd $path
+cd /$branch
 echo pwd:$(pwd)
 
 echo update packages ...
 pip install -r requirements.txt
 
 echo execute python ...
+python --version
+
 python $script
