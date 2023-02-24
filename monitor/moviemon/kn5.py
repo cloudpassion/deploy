@@ -20,7 +20,5 @@ while True:
     print('tstart')
     main_kinozal_releases()
     print('mex')
-    quit()
     time.sleep(TIMEOUT)
-    break
 
