@@ -2,13 +2,14 @@ FROM python:3.10-bullseye
 
 LABEL org.opencontainers.image.authors="dock@cldvp.xyz"
 
-# update packages and download sources
-RUN apt-get update && \
-    apt-get -q -y upgrade
-
 RUN echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
 RUN cat ~/.ssh/id_rsa.pub
+
+# update packages and download sources
+RUN apt-get update && \
+    apt-get -q -y upgrade && \
+    apt-get -q -y install wget
 
 ARG branch="moviemon"
 ARG path="deploy/monitor/${branch}"
@@ -46,8 +47,5 @@ ENV port 10321
 
 #ENTRYPOINT "/deploy/run.sh"
 
-CMD ["wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh" ; "chmod +x deploy.run.sh" ; "./deploy/run.sh" ]
-#ARG RUN=0
-#RUN RUN=${RUN} wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh
-#RUN chmod +x /deploy/run.sh
+CMD wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh ; chmod +x deploy.run.sh ; ./deploy/run.sh
 
