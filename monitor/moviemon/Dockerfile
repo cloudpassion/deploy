@@ -8,8 +8,8 @@ RUN cat ~/.ssh/id_rsa.pub
 
 # update packages and download sources
 RUN apt-get update && \
-    apt-get -q -y upgrade && \
-    apt-get -q -y install wget rsync
+    apt-get -q -y upgrade
+RUN apt-get -q -y install wget rsync
 
 ARG branch="moviemon"
 ARG path="deploy/monitor/${branch}"
