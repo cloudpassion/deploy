@@ -14,11 +14,12 @@ cd /modules && \
     git pull --ff-only
 
 echo sync files
-if [[ "$rsync" == y ]]; then
+if [[ "$rsync" == "y" ]]; then
     # tag, url, port
     rsync -e "ssh -p ${port}" "${url}":${tag}/ .
 fi
-
+echo ${port}, ${url}, ${tag}
+exit
 echo going to workdir ...
 cd /"$branch"
 
