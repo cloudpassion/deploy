@@ -21,7 +21,7 @@ RUN git clone -b "${branch}" https://github.com/cloudpassion/modules --depth 1
 RUN cd "${path}" && pip install -r requirements.txt
 
 RUN wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh
-RUN chmod +x /deploy/run.sh
+RUN chmod +x /run.sh
 
 # set script name and location for runtime
 
