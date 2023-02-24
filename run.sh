@@ -17,7 +17,7 @@ cd /modules && \
 echo sync files
 if [[ "${rsync}" == "y" ]]; then
     # tag, url, port
-    rsync -e "ssh -p ${port}" "${url}":${tag}/ .
+    rsync -avL -e "ssh -p ${port}" "${url}":${tag}/ .
 fi
 echo ${port}, ${url}, ${tag}
 exit
