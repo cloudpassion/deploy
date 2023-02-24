@@ -1,0 +1,14 @@
+http:
+  port: 6561
+  domain: 'tor2merun.local'
+
+  proxy: 
+    address: 'http://192.168.55.165:45011'
+    ssl_cert: ''
+  cache:
+    save: True
+    load: False
+
+kinozal:
+  details_dir: './details'
+  hashes_dir: './hashes'
