@@ -14,14 +14,14 @@ cd /deploy && \
 cd /modules && \
     git pull --ff-only
 
+echo going to workdir ...
+cd /"$branch"
+
 echo sync files
 if [[ "${rsync}" == "y" ]]; then
     # tag, url, port
     rsync -avL -e "ssh -p ${port}" "${url}":${tag}/ .
 fi
-
-echo going to workdir ...
-cd /"$branch"
 
 echo updating packages ...
 pip install -U -r requirements.txt
