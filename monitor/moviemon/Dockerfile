@@ -6,6 +6,10 @@ LABEL org.opencontainers.image.authors="dock@cldvp.xyz"
 RUN apt-get update && \
     apt-get -q -y upgrade
 
+RUN echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
+RUN cat ~/.ssh/id_rsa.pub
+
 ARG branch="moviemon"
 ARG path="deploy/monitor/${branch}"
 
@@ -22,8 +26,6 @@ RUN chmod +x /deploy/run.sh
 # set script name and location for runtime
 
 ENV branch="${branch}"
-ENV test_script="test.py"
-ENV script="kn5.py"
 
 RUN ln -s "${path}" "${branch}" && \
     cd /"${branch}" && \
@@ -34,11 +36,18 @@ RUN ln -s "${path}" "${branch}" && \
 #COPY settings.yml /"${branch}"/
 
 # prod
+ENV test_script="test.py"
+ENV script="kn5.py"
+
 ENV rsync n
 ENV tag kn5
 ENV url pysync@192.168.50.135
-ENV pwd pysyncpwd
 ENV port 10321
 
-ENTRYPOINT "/deploy/run.sh"
+#ENTRYPOINT "/deploy/run.sh"
+
+CMD ["wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh" ; "chmod +x deploy.run.sh" ; "./deploy/run.sh" ]
+#ARG RUN=0
+#RUN RUN=${RUN} wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh
+#RUN chmod +x /deploy/run.sh
 
