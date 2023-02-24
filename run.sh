@@ -19,14 +19,12 @@ if [[ "${rsync}" == "y" ]]; then
     # tag, url, port
     rsync -avL -e "ssh -p ${port}" "${url}":${tag}/ .
 fi
-echo ${port}, ${url}, ${tag}
-exit
+
 echo going to workdir ...
 cd /"$branch"
 
 echo updating packages ...
-pip install -r requirements.txt
-
+pip install -U -r requirements.txt
 
 echo executing $script in $(python --version) ...
 
