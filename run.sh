@@ -13,11 +13,24 @@ cd /deploy && \
 cd /modules && \
     git pull --ff-only
 
+echo sync files
+if [[ "$rsync" == y ]]; then
+    # tag, url, port
+    rsync -e "ssh -p ${port}" "${url}"
+fi
+
+ENV rsync n
+ENV tag kn5
+ENV url pysync@192.168.50.135
+ENV pwd pysyncpwd
+ENV port 10321
+
 echo going to workdir ...
 cd /"$branch"
 
 echo updating packages ...
 pip install -r requirements.txt
+
 
 echo executing $script in $(python --version) ...
 
