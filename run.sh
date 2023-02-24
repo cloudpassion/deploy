@@ -1,3 +1,4 @@
+#!/bin/bash
 
 echo variables from Dockerfile ...
 
@@ -14,7 +15,7 @@ cd /modules && \
     git pull --ff-only
 
 echo sync files
-if [[ "$rsync" == "y" ]]; then
+if [[ "${rsync}" == "y" ]]; then
     # tag, url, port
     rsync -e "ssh -p ${port}" "${url}":${tag}/ .
 fi
