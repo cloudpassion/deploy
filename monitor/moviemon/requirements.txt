@@ -4,3 +4,4 @@ python-magic==0.4.27
 feedparser==6.0.10
 python-dateutil==2.8.2
 omegaconf==2.3.0
+lxml==4.9.2
