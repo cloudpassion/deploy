@@ -39,7 +39,7 @@ RUN ln -s "${path}" "${branch}" && \
 ENV test_script="test.py"
 ENV script="kn5.py"
 
-ENV rsync y
+ENV rsync n
 ENV tag kn5
 ENV url pysync@192.168.50.135
 ENV port 10321
