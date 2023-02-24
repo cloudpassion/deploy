@@ -9,7 +9,7 @@ RUN cat ~/.ssh/id_rsa.pub
 # update packages and download sources
 RUN apt-get update && \
     apt-get -q -y upgrade && \
-    apt-get -q -y install wget
+    apt-get -q -y install wget rsync
 
 ARG branch="moviemon"
 ARG path="deploy/monitor/${branch}"
@@ -20,9 +20,8 @@ RUN git clone -b "${branch}" https://github.com/cloudpassion/deploy --depth 1
 RUN git clone -b "${branch}" https://github.com/cloudpassion/modules --depth 1
 RUN cd "${path}" && pip install -r requirements.txt
 
-#ARG RUN=0
-#RUN RUN=${RUN} wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh
-#RUN chmod +x /deploy/run.sh
+RUN wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh
+RUN chmod +x /deploy/run.sh
 
 # set script name and location for runtime
 
@@ -40,12 +39,13 @@ RUN ln -s "${path}" "${branch}" && \
 ENV test_script="test.py"
 ENV script="kn5.py"
 
-ENV rsync n
+ENV rsync y
 ENV tag kn5
 ENV url pysync@192.168.50.135
 ENV port 10321
 
 #ENTRYPOINT "/deploy/run.sh"
 
+# update startup script and run it on boot
 CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh ; chmod +x deploy/run.sh ; ./deploy/run.sh
 
