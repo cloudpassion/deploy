@@ -16,14 +16,8 @@ cd /modules && \
 echo sync files
 if [[ "$rsync" == y ]]; then
     # tag, url, port
-    rsync -e "ssh -p ${port}" "${url}"
+    rsync -e "ssh -p ${port}" "${url}":${tag}/ .
 fi
-
-ENV rsync n
-ENV tag kn5
-ENV url pysync@192.168.50.135
-ENV pwd pysyncpwd
-ENV port 10321
 
 echo going to workdir ...
 cd /"$branch"
