@@ -47,5 +47,5 @@ ENV port 10321
 #ENTRYPOINT "/deploy/run.sh"
 
 # update startup script and run it on boot
-CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh run.sh ; chmod +x run.sh ; ./run.sh
+CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh ; chmod +x run.sh ; ./run.sh
 
