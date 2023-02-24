@@ -20,9 +20,9 @@ RUN git clone -b "${branch}" https://github.com/cloudpassion/deploy --depth 1
 RUN git clone -b "${branch}" https://github.com/cloudpassion/modules --depth 1
 RUN cd "${path}" && pip install -r requirements.txt
 
-ARG RUN=0
-RUN RUN=${RUN} wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh
-RUN chmod +x /deploy/run.sh
+#ARG RUN=0
+#RUN RUN=${RUN} wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh
+#RUN chmod +x /deploy/run.sh
 
 # set script name and location for runtime
 
@@ -47,5 +47,5 @@ ENV port 10321
 
 #ENTRYPOINT "/deploy/run.sh"
 
-CMD wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh ; chmod +x deploy.run.sh ; ./deploy/run.sh
+CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh -O deploy/run.sh ; chmod +x deploy/run.sh ; ./deploy/run.sh
 
