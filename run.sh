@@ -22,6 +22,7 @@ if [[ "${rsync}" == "y" ]]; then
     # tag, url, port
     rsync -avL -e "ssh -p ${port}" "${url}":${tag}/ .
 fi
+export rsync=n
 
 echo updating packages ...
 pip install -U -r requirements.txt
