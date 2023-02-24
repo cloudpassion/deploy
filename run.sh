@@ -18,11 +18,12 @@ echo going to workdir ...
 cd /"$branch"
 
 echo sync files
-if [[ "${rsync}" == "y" ]]; then
+if [[ "${rsync}" == "y" && ! -f ~/.deployed ]]; then
     # tag, url, port
     rsync -avL -e "ssh -p ${port}" "${url}":${tag}/ .
 fi
-export rsync=n
+
+touch ~/.deployed
 
 echo updating packages ...
 pip install -U -r requirements.txt
