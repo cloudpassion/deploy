@@ -29,9 +29,16 @@ RUN ln -s "${path}" "${branch}" && \
     cd /"${branch}" && \
     ln -s /modules my
 
-# copy settings
-COPY .secrets.yml /"${branch}"/
+# dev
+#COPY .secrets.yml /"${branch}"/
 #COPY settings.yml /"${branch}"/
+
+# prod
+ENV rsync n
+ENV tag kn5
+ENV url pysync@192.168.50.135
+ENV pwd pysyncpwd
+ENV port 10321
 
 ENTRYPOINT "/deploy/run.sh"
 
