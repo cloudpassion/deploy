@@ -12,7 +12,7 @@ async def main():
     await server.initialize()
 
     server.app.run(
-        host='0.0.0.0', port=settings.http.port,
+        host=settings.http.host, port=settings.http.port,
     )
 
     while True:

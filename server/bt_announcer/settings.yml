@@ -1,4 +1,5 @@
 http:
+  host: '127.0.0.1'
   port: 6561
   domain: 'tor2merun.local'
 
