@@ -37,4 +37,6 @@ if [ -f $test_script ]; then
     fi
 fi
 
-python $script
+if [[ "$test_script" != "$script" ]]; then
+    python $script
+fi
