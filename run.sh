@@ -2,20 +2,7 @@
 
 echo variables from Dockerfile ...
 
-echo path:$path
-echo branch:$branch
-echo script:$script
-
-echo pulling sources ...
-
-cd /deploy && \
-    git pull --ff-only
-
-cd /modules && \
-    git pull --ff-only
-
-echo going to workdir ...
-cd /"$branch"
+echo commands_to_run:"$1"
 
 echo sync files
 if [[ "${rsync}" == "y" && ! -f ~/.deployed ]]; then
@@ -25,18 +12,8 @@ fi
 
 touch ~/.deployed
 
-echo updating packages ...
-pip install -U -r requirements.txt
-
-echo executing $script in $(python --version) ...
-
-if [ -f $test_script ]; then
-    python $test_script
-    if [ $? -ne 0 ]; then
-        echo not pass tests
-    fi
-fi
-
-if [[ "$test_script" != "$script" ]]; then
-    python $script
-fi
+IFS=';' read -ra commands <<< "$1"
+for command in "${commands[@]}"; do
+    echo "executing > $command"
+    eval "$command"
+done
