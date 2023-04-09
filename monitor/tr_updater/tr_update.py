@@ -9,5 +9,10 @@ async def main():
 
     await updater.update()
 
+TIMEOUT=60*10
 
-asyncio.run(main())
+while True:
+    print('tr_start')
+    asyncio.run(main())
+    time.sleep(TIMEOUT)
+
