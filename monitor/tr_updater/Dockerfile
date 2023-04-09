@@ -30,7 +30,7 @@ ENV branch="${branch}"
 RUN ln -s "${path}" "${branch}" && \
     cd /"${branch}" && \
     ln -s /modules my && \
-    ln -s /modules/* 
+    ln -s /modules/* .
 
 # dev
 #COPY .secrets.yml /"${branch}"/
