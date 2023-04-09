@@ -40,7 +40,7 @@ ENV test_script="test.py"
 ENV script="tr_update.py"
 
 ENV rsync y
-ENV tag kn5
+ENV tag tr_updater
 ENV url pysync@192.168.50.135
 ENV port 10321
 
