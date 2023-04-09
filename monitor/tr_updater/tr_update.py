@@ -1,19 +1,20 @@
 import time
 import asyncio
 
+from log import logger
+
 from app import TruckersMPUpdater
 
+TIMEOUT = 60*10
 
 async def main():
 
-    updater = TruckersMPUpdater()
+    while True:
+        logger.info(f'tr_start')
+        updater = TruckersMPUpdater()
 
-    await updater.update()
+        await updater.update()
+        await asyncio.sleep(TIMEOUT)
 
-TIMEOUT=60*10
 
-while True:
-    print('tr_start')
-    asyncio.run(main())
-    time.sleep(TIMEOUT)
-
+asyncio.run(main())

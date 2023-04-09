@@ -2,6 +2,7 @@ import os
 import time
 import shutil
 
+from log import logger
 from atiny.http.aio import MyHttp
 
 from .const import DOWNLOAD_URL, DAT
@@ -14,6 +15,7 @@ class DownloadUpdate(AbstractUpdater):
 
         data_dir = time.strftime('%Y/%m.%d/%Y.%m.%d_%H.%M.%S')
         os.makedirs(data_dir)
+        logger.info(f'{self.to_update}')
 
         info = {}
         links = []

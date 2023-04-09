@@ -20,8 +20,8 @@ RUN git clone -b "${branch}" https://github.com/cloudpassion/deploy --depth 1
 RUN git clone -b "${branch}" https://github.com/cloudpassion/modules --depth 1
 RUN cd "${path}" && pip install -r requirements.txt
 
-RUN wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh
-RUN chmod +x /run.sh
+RUN wget https://raw.githubusercontent.com/cloudpassion/deploy/main/python.sh
+RUN chmod +x /python.sh
 
 # set script name and location for runtime
 
@@ -45,7 +45,5 @@ ENV tag tr_updater
 ENV url pysync@192.168.50.135
 ENV port 10321
 
-#ENTRYPOINT "/deploy/run.sh"
-
 # update startup script and run it on boot
-CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh ; chmod +x run.sh ; ./run.sh
+CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/python.sh ; chmod +x python.sh ; ./python.sh
