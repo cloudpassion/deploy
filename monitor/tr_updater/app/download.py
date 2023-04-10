@@ -43,7 +43,9 @@ class DownloadUpdate(AbstractUpdater):
         shutil.copyfile('files.json', f'{data_dir}/files.json')
         shutil.copyfile('files.json', DAT)
 
-        http = MyHttp(save_cache=True, save_headers=False)
+        http = MyHttp(
+            save_cache=True, save_headers=False
+        )
         await http.get_urls(
             links, headers=self.headers,
             max_tasks=1,

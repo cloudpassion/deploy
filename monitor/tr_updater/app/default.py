@@ -15,3 +15,7 @@ class AbstractUpdater:
     }
 
     to_update = {}
+    
+    def __init__(self):
+        pass
+

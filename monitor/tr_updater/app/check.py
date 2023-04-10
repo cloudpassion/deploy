@@ -36,7 +36,8 @@ class CheckUpdate(DownloadUpdate):
 
         http = MyHttp(
             save_cache=True,
-            load_cache=False
+            load_cache=False,
+            save_headers=False,
         )
 
         resp = await http.get(files_url)
