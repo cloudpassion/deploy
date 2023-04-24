@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo variables from Dockerfile ...
+echo export some variables
+export PYTHONUNBUFFERED=yes
+
+echo show get variables from Dockerfile ...
 
 echo path:$path
 echo branch:$branch

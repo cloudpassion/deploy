@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo variables from Dockerfile ...
+echo export some variables
+export PYTHONUNBUFFERED=yes
+
+echo show variables from Dockerfile ...
 echo url:$url
 echo port:$port
 echo tag:$tag
