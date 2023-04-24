@@ -47,7 +47,7 @@ ENV url pysync@192.168.55.181
 ENV port 10321
 
 RUN crontab -l | { cat; echo PYTHONUNBUFFERED=yes; } | crontab -
-RUN crontab -l | { cat; echo "*/5 * * * * ps aux | grep -in ${script}.py | grep -v grep; if [ $? -eq 0 ]; then kill -9 kill -9 $(ps aux | grep -in ${script}.py | grep -v grep | awk '{print $2}'); fi ; /python.sh > /python.log"; } | crontab -
+RUN crontab -l | { cat; echo "*/5 * * * * ps aux | grep -in ${script}.py | grep -v grep; if [ $? -eq 0 ]; then kill -9 kill -9 $(ps aux | grep -in ${script}.py | grep -v grep | awk '{print $2}'); fi ; /python.sh > /python.log 2>&1"; } | crontab -
 
 # update startup script and run it on boot
 CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/python.sh ; \
