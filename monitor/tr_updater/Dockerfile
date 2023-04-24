@@ -49,4 +49,4 @@ ENV port 10321
 RUN crontab -l | { cat; echo "*/5 * * * * /python.sh"; } | crontab -
 
 # update startup script and run it on boot
-CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/python.sh ; chmod +x python.sh ; find / -name '*cron*' ; anacron
+CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/python.sh ; chmod +x python.sh ; cron -f
