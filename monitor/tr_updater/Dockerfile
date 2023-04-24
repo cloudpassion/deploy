@@ -46,7 +46,11 @@ ENV tag tr_updater
 ENV url pysync@192.168.55.181
 ENV port 10321
 
-RUN crontab -l | { cat; echo "*/5 * * * * /python.sh"; } | crontab -
+RUN crontab -l | { cat; echo -e PYTHONUNBUFFERED=yes\n; } | crontab -
+RUN crontab -l | { cat; echo "*/5 * * * * ps aux | grep -in ${script}.py | grep -v grep; if [ $? -eq 0 ]; then kill -9 kill -9 $(ps aux | grep -in ${script}.py | grep -v grep | awk '{print $2}'); fi ; /python.sh > /python.log"; } | crontab -
 
 # update startup script and run it on boot
-CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/python.sh ; chmod +x python.sh ; cron -f
+CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/python.sh ; \
+    chmod +x python.sh ; /python.sh ; \
+    crontab -l ; cron -f
+
