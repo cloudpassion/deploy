@@ -10,10 +10,11 @@ echo commands_to_run:"$1"
 echo sync files
 if [[ "${rsync}" == "y" && ! -f ~/.deployed ]]; then
     # tag, url, port
-    rsync -avL -e "ssh -p ${port}" "${url}":${tag}/ .
+    rsync -avL -e "ssh -o BatchMode=yes -p ${port}" "${url}":${tag}/ .
+    if [ $? -eq 0 ]; then
+        touch ~/.deployed
+    fi
 fi
-
-touch ~/.deployed
 
 IFS=';' read -ra commands <<< "$1"
 for command in "${commands[@]}"; do

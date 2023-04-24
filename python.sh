@@ -20,7 +20,10 @@ cd /"$branch"
 echo sync files
 if [[ "${rsync}" == "y" && ! -f ~/.deployed ]]; then
     # tag, url, port
-    rsync -avL -e "ssh -p ${port}" "${url}":${tag}/ .
+    rsync -avL -e "ssh -o BatchMode=yes -p ${port}" "${url}":${tag}/ .
+    if [ $? -eq 0 ]; then
+       touch ~/.deployed
+    fi
 fi
 
 touch ~/.deployed
