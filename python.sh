@@ -26,8 +26,6 @@ if [[ "${rsync}" == "y" && ! -f ~/.deployed ]]; then
     fi
 fi
 
-touch ~/.deployed
-
 echo updating packages ...
 pip install -U -r requirements.txt
 
