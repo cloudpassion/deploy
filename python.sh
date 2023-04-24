@@ -2,6 +2,7 @@
 
 echo export some variables
 export PYTHONUNBUFFERED=yes
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 echo show get variables from Dockerfile ...
 
