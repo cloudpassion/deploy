@@ -1,8 +1,10 @@
 #!/bin/bash
 
 echo export some variables
-export PYTHONUNBUFFERED=yes
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+for variable_value in $(sed 's/\x00/\n\g' < /proc/1/environ); do
+    export $variable_value
+done
 
 echo show get variables from Dockerfile ...
 
