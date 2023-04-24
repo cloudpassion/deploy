@@ -1,4 +1,3 @@
-import time
 import asyncio
 
 from log import logger
@@ -6,6 +5,7 @@ from log import logger
 from app import TruckersMPUpdater
 
 TIMEOUT = 60*10
+
 
 async def main():
 

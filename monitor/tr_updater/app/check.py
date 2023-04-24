@@ -15,6 +15,7 @@ class CheckUpdate(DownloadUpdate):
     async def get_local_cache(self):
 
         if not os.path.isfile(DAT):
+            logger.info(f'e:exist {DAT=}')
             return
 
         with open(DAT, 'r') as fr:
@@ -26,6 +27,8 @@ class CheckUpdate(DownloadUpdate):
             md5 = line.get('Md5')
 
             self.cache[tp][file_path] = md5
+
+        logger.info(f'{self.cache[tp]}')
 
     async def check_launcher(self):
         pass
@@ -67,8 +70,8 @@ class CheckUpdate(DownloadUpdate):
         if self.to_update:
             await self.download_core()
 
-
-
+    async def clear_update_cache(self):
+        self.to_update = dict()
 
 
 
