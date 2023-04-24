@@ -46,8 +46,10 @@ ENV tag tr_updater
 ENV url pysync@192.168.55.181
 ENV port 10321
 
-RUN crontab -l | { cat; echo PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/loca/bin:/usr/local/sbin; } | crontab -
-RUN crontab -l | { cat; echo PYTHONUNBUFFERED=yes; } | crontab -
+ENV PYTHONUNBUFFERED=yes
+ENV PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+RUN crontab -l | { cat; echo; } | crontab -
 RUN crontab -l | { cat; echo "*/5 * * * * ps aux | grep -in ${script} | grep -v grep; if [ \$? -eq 0 ]; then kill -9 \$(ps aux | grep -in ${script} | grep -v grep | awk '{print \$2}'); fi ; /python.sh > /python.log 2>&1"; } | crontab -
 
 # update startup script and run it on boot
