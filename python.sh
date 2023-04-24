@@ -2,9 +2,12 @@
 
 echo export some variables
 
-for variable_value in $(sed 's/\x00/\n\g' < /proc/1/environ); do
+for variable_value in $(cat /proc/1/environ | sed 's/\x00/\n/g'); do
     export $variable_value
 done
+
+# temp
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 echo show get variables from Dockerfile ...
 
