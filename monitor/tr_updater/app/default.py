@@ -14,8 +14,4 @@ class AbstractUpdater:
         'system': {},
     }
 
-    to_update = {}
-    
-    def __init__(self):
-        pass
-
+    to_update: dict

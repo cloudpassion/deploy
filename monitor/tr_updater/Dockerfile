@@ -10,6 +10,7 @@ RUN cat ~/.ssh/id_rsa.pub
 RUN apt-get update && \
     apt-get -q -y upgrade
 RUN apt-get -q -y install wget rsync
+RUN apt-get -q -y install cron
 
 ARG branch="tr_updater"
 ARG path="deploy/monitor/${branch}"
@@ -42,8 +43,10 @@ ENV script="tr_update.py"
 
 ENV rsync y
 ENV tag tr_updater
-ENV url pysync@192.168.50.135
+ENV url pysync@192.168.55.181
 ENV port 10321
 
+RUN crontab -l | { cat; echo "*/5 * * * * /python.sh"; } | crontab -
+
 # update startup script and run it on boot
-CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/python.sh ; chmod +x python.sh ; ./python.sh
+CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/python.sh ; chmod +x python.sh ; cron

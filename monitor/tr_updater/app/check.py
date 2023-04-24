@@ -31,10 +31,11 @@ class CheckUpdate(DownloadUpdate):
         logger.info(f'{self.cache[tp]}')
 
     async def check_launcher(self):
-        pass
+        await self.clear_update_cache()
 
     async def check_core(self):
 
+        await self.clear_update_cache()
         files_url = f'{UPDATE_URL}/files.json'
 
         http = MyHttp(
