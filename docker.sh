@@ -1,9 +1,16 @@
 #!/bin/bash
+#
+echo get variables from Dockerfile ...
 
-echo export some variables
-export PYTHONUNBUFFERED=yes
+for variable_value in $(cat /proc/1/environ | sed 's/\x00/\n/g'); do
+    export $variable_value
+done
+
+# temp
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 echo show variables from Dockerfile ...
+
 echo url:$url
 echo port:$port
 echo tag:$tag

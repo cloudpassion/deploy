@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo export some variables
+echo get variables from Dockerfile ...
 
 for variable_value in $(cat /proc/1/environ | sed 's/\x00/\n/g'); do
     export $variable_value
@@ -9,7 +9,7 @@ done
 # temp
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
-echo show get variables from Dockerfile ...
+echo show variables from Dockerfile ...
 
 echo path:$path
 echo branch:$branch
