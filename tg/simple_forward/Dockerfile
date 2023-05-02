@@ -20,8 +20,10 @@ RUN apt-get -q -y install cron
 # change
 ARG entry_script="python.sh"
 ARG branch="tg_forward_sh"
-
-ARG path="deploy/monitor/${branch}"
+#ARG work_folder="${branch}"
+#ARG path="deploy/tg/simple_forward/${branch}"
+ARG work_folder="simple_forward"
+ARG path="deploy/tg/simple_forward"
 
 # grab sources for specific branch
 # and download startup script
@@ -36,8 +38,8 @@ RUN chmod +x /"${entry_script}"
 
 ENV branch="${branch}"
 
-RUN ln -s "${path}" "${branch}" && \
-    cd /"${branch}" && \
+RUN ln -s "${path}" "${work_folder}" && \
+    cd /"${work_folder}" && \
     ln -s /modules my && \
     ln -s /modules/* .
 
@@ -54,8 +56,8 @@ ENV url pysync@192.168.55.181
 ENV port 10321
 
 # update startup script and run it on boot
-CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/"${entry_script}" ; 
-    chmod +x "${entry_script}" ; 
+CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/"${entry_script}" ; \
+    chmod +x "${entry_script}" ; \
     ./"${entry_script}"
 
 
