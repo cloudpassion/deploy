@@ -20,10 +20,12 @@ RUN apt-get -q -y install cron
 # change
 ARG entry_script="python.sh"
 ARG branch="tg_forward_sh"
+
 #ARG work_folder="${branch}"
 #ARG path="deploy/tg/simple_forward/${branch}"
+
 ARG work_folder="simple_forward"
-ARG path="deploy/tg/simple_forward"
+ARG path="/deploy/tg/simple_forward"
 
 # grab sources for specific branch
 # and download startup script
@@ -37,8 +39,11 @@ RUN chmod +x /"${entry_script}"
 # set script name and location for runtime
 
 ENV branch="${branch}"
+ENV work_folder="${work_folder}"
+ENV entry_script="${entry_script}"
 
 RUN ln -s "${path}" "${work_folder}" && \
+    ln -s "${path}" "${branch}" && \
     cd /"${work_folder}" && \
     ln -s /modules my && \
     ln -s /modules/* .
@@ -46,10 +51,10 @@ RUN ln -s "${path}" "${work_folder}" && \
 # prod
 ENV test_script="test.py"
 # change
-ENV script="tr_forward_simple.py"
+ENV script="tg_forward_simple.py"
 
 # change
-ENV tag tr_forward_sh
+ENV tag tg_forward_sh
 
 ENV rsync y
 ENV url pysync@192.168.55.181
