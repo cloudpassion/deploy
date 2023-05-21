@@ -10,7 +10,7 @@ requests==2.30.0
 
 pyrogram==2.0.106
 tgcrypto==1.2.5
-#uvloop==0.17.0
+uvloop==0.17.0
 
 #
 django==4.2.1
@@ -19,7 +19,7 @@ django-extensions==3.2.1
 django-debug-toolbar==4.1.0
 django-debugger
 psycopg2==2.9.6
-django-admin-countless
+django-admin-countless==0.4.0
 
 #spb
 selenium==4.9.1
