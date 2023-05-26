@@ -1,5 +1,10 @@
 FROM python:3.10-bullseye
 
+# this Dockerfile for python script
+# run and forget variant without reload
+# all excepts grabbing in script
+# exit script stopping docker container
+
 LABEL org.opencontainers.image.authors="dock@cldvp.xyz"
 
 RUN echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
@@ -10,9 +15,14 @@ RUN cat ~/.ssh/id_rsa.pub
 RUN apt-get update && \
     apt-get -q -y upgrade
 RUN apt-get -q -y install wget rsync
+RUN apt-get -q -y install cron
 
-ARG branch="moviemon"
-ARG path="deploy/monitor/${branch}"
+# change
+ARG entry_script="python.sh"
+ARG branch="moviemon_v1"
+
+ARG work_folder="moviemon"
+ARG path="/deploy/monitor/moviemon"
 
 # grab sources for specific branch
 # and download startup script
@@ -20,32 +30,36 @@ RUN git clone -b "${branch}" https://github.com/cloudpassion/deploy --depth 1
 RUN git clone -b "${branch}" https://github.com/cloudpassion/modules --depth 1
 RUN cd "${path}" && pip install -r requirements.txt
 
-RUN wget https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh
-RUN chmod +x /run.sh
+RUN wget https://raw.githubusercontent.com/cloudpassion/deploy/main/"${entry_script}"
+RUN chmod +x /"${entry_script}"
 
 # set script name and location for runtime
 
 ENV branch="${branch}"
+ENV work_folder="${work_folder}"
+ENV entry_script="${entry_script}"
 
-RUN ln -s "${path}" "${branch}" && \
-    cd /"${branch}" && \
-    ln -s /modules my
-
-# dev
-#COPY .secrets.yml /"${branch}"/
-#COPY settings.yml /"${branch}"/
+RUN ln -s "${path}" "${work_folder}" && \
+    ln -s "${path}" "${branch}" && \
+    cd /"${work_folder}" && \
+    ln -s /modules my && \
+    ln -s /modules/* .
 
 # prod
 ENV test_script="test.py"
+# change
 ENV script="kn5.py"
 
+# change
+ENV tag moviemon_v1
+
 ENV rsync y
-ENV tag kn5
-ENV url pysync@192.168.50.135
+ENV url pysync@192.168.55.181
 ENV port 10321
 
-#ENTRYPOINT "/deploy/run.sh"
-
 # update startup script and run it on boot
-CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/run.sh ; chmod +x run.sh ; ./run.sh
+CMD wget -N https://raw.githubusercontent.com/cloudpassion/deploy/main/"${entry_script}" ; \
+    chmod +x "${entry_script}" ; \
+    ./"${entry_script}"
+
 
