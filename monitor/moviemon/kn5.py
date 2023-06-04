@@ -8,7 +8,7 @@ from sql import sql_init
 from otg import tg_init, tg_update
 
 from kn.monmov.kinozal import KinozalMonitor
-from kn.kinozaltv.site import KinozalSite
+from kn.getmov import GetMovies
 
 
 sql_init()
@@ -35,7 +35,8 @@ async def test():
 
 async def main():
 
-    deep_check = False
+    new_day = False
+    new_month = False
 
     while True:
 
@@ -49,20 +50,31 @@ async def main():
         pre_year = cur_year - 1
 
         day = tm.day
+        month = tm.month
 
-        if deep_check:
+        if new_day:
 
-            deep_check = False
+            print(f'new day start')
+            new_day = False
 
-            print(f'deep start')
+            gm = GetMovies()
+
+            await gm.imdb_upcoming_list()
+            await gm.merge_year_files(cur_year)
+
+            print(f'new day end')
+
+        if new_month:
+
+            print(f'new month start')
             for year in (
                     pre_year,
                     cur_year,
             ):
-                continue
-                # await kn.deep_releases(title_year=year)
+                await kn.deep_releases(title_year=year)
+                await kn.main_releases(year=cur_year)
 
-            print(f'deep end')
+            print(f'new month end')
 
         print(f'main start')
         await kn.main_releases(year=cur_year)
@@ -71,7 +83,10 @@ async def main():
         time.sleep(timeout)
 
         if datetime.now().day != day:
-            deep_check = True
+            new_day = True
+
+        if datetime.now().month != month:
+            new_month = True
 
 
 asyncio.run(test())
