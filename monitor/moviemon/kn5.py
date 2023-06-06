@@ -10,6 +10,7 @@ from otg import tg_init, tg_update
 from kn.monmov.kinozal import KinozalMonitor
 from kn.getmov import GetMovies
 
+from kn.kinozaltv import KinozalSite
 
 sql_init()
 tg_init()
@@ -19,14 +20,21 @@ tg_init()
 async def test():
 
     return
-    # t = KinozalSite()
-    #
-    # await t.get_details(1978519)
-    # quit()
-
     kn = KinozalMonitor()
-
-    await kn.main_releases(year=2023)
+    await kn.top_releases(
+        year='all',
+        years=[2020, 2021, 2022, 2023, 2024],
+        uploaded_in=['week', 'month', ],
+    )
+    quit()
+    #
+    # await kn.top_releases(
+    #     year='all',
+    #     years=[2020, 2021, 2022, 2023, 2024],
+    #     uploaded_in=[
+    #         'all', 'week', 'month',
+    #     ],
+    # )
     # await kn.deep_releases(title_year=2022, start='It Came from Somewhere')
     # await kn.deep_releases(title_year=2023)
     #
@@ -44,10 +52,17 @@ async def main():
         timeout = 3600 * hours + random.randint(500, 1000)
 
         kn = KinozalMonitor()
+        gm = GetMovies()
 
         tm = datetime.now()
         cur_year = tm.year
         pre_year = cur_year - 1
+        pp_year = pre_year - 1
+        next_year = cur_year + 1
+
+        years = [pp_year, pre_year, cur_year, next_year]
+        for year in years:
+            gm.merge_year_files(year)
 
         day = tm.day
         month = tm.month
@@ -57,10 +72,14 @@ async def main():
             print(f'new day start')
             new_day = False
 
-            gm = GetMovies()
-
             await gm.imdb_upcoming_list()
-            await gm.merge_year_files(cur_year)
+            gm.merge_year_files(cur_year)
+
+            await kn.top_releases(
+                year='all',
+                years=years,
+                uploaded_in=['week', ],
+            )
 
             print(f'new day end')
 
@@ -68,11 +87,20 @@ async def main():
 
             print(f'new month start')
             for year in (
+                    pp_year,
                     pre_year,
                     cur_year,
             ):
                 await kn.deep_releases(title_year=year)
-                await kn.main_releases(year=cur_year)
+                await kn.main_releases(year=year)
+
+            await kn.top_releases(
+                year='all',
+                years=years,
+                uploaded_in=[
+                    'all', 'week', 'month',
+                ],
+            )
 
             print(f'new month end')
 
