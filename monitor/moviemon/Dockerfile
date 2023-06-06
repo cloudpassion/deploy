@@ -39,10 +39,10 @@ ENV branch="${branch}"
 ENV work_folder="${work_folder}"
 ENV entry_script="${entry_script}"
 
-RUN ln -s "${path}" "${work_folder}" && \
-    ln -s "${path}" "${branch}" && \
-    cd /"${work_folder}" && \
-    ln -s /modules my && \
+RUN ln -s "${path}" "${work_folder}"; \
+    ln -s "${path}" "${branch}"; \
+    cd /"${work_folder}"; \
+    ln -s /modules my; \
     ln -s /modules/* .
 
 # prod
