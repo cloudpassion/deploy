@@ -35,6 +35,7 @@ RUN chmod +x /"${entry_script}"
 
 # set script name and location for runtime
 
+ENV path="${path}"
 ENV branch="${branch}"
 ENV work_folder="${work_folder}"
 ENV entry_script="${entry_script}"
