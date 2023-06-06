@@ -13,6 +13,7 @@ echo show variables from Dockerfile ...
 
 echo path:$path
 echo branch:$branch
+echo work_folder:$work_folder
 echo script:$script
 
 echo pulling sources ...
@@ -23,8 +24,19 @@ cd /deploy && \
 cd /modules && \
     git pull --ff-only
 
+cd /
+
+echo making path symlinks
+ln -s "${path}" "${branch}"
+ln -s "${path}" "${work_folder}"
+
 echo going to workdir ...
-cd /"$branch"
+cd /"${branch}"
+cd /"${work_folder}"
+
+echo making modules symlinks
+ln -s /modules my
+ln -s /modules/* .
 
 echo sync files
 if [[ "${rsync}" == "y" && ! -f ~/.deployed ]]; then
