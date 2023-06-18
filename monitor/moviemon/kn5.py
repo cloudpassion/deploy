@@ -120,7 +120,7 @@ async def main():
 
         print(f'main start')
         await kn.main_releases(year=cur_year)
-        await kn.hot_picks_releases(year=cur_year, years=years)
+        await kn.hot_picks_releases(year=cur_year)
         print(f'main end')
 
         time.sleep(timeout)
