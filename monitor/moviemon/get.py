@@ -48,7 +48,7 @@ async def main():
 
         await kn.kinorium_get_movie_premiers(
             year=cur_year,
-            max_page=1,
+            # max_page=1,
             # skip_write=True
         )
 

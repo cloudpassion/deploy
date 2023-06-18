@@ -81,6 +81,15 @@ async def main():
                 uploaded_in=['week', ],
             )
 
+            for lang in ('ru', 'en', ):
+                kinorium = GetMovies(
+                    kinorium_lang=lang
+                )
+
+                await kinorium.kinorium_get_movie_premiers(
+                    year=cur_year,
+                )
+
             print(f'new day end')
 
         if new_month:
