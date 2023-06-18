@@ -1,17 +1,30 @@
 import asyncio
 from datetime import datetime
 
-from my.sql import sql_init
-from tg.tg import tg_init
+from sql import sql_init
+from otg import tg_init, tg_update
 
 sql_init()
 tg_init()
 
-from kn.getmov import GetMovies
+from kn import GetMovies
+from kn import KinoMovieMonitor
 
 
 async def test():
 
+    tm = datetime.now()
+    cur_year = tm.year
+    pre_year = cur_year - 1
+    pp_year = pre_year - 1
+    next_year = cur_year + 1
+
+    years = [pp_year, pre_year, cur_year, next_year]
+
+    kn = KinoMovieMonitor()
+    await kn.hot_picks_releases(year=cur_year, years=years)
+
+    return
     for lang in ('ru', 'en', ):
         kn = GetMovies(
             kinorium_lang=lang

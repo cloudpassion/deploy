@@ -4,10 +4,13 @@ import asyncio
 
 from datetime import datetime
 
+from log import log_stack
+
 from sql import sql_init
 from otg import tg_init, tg_update
 
-from kn.monmov.kinozal import KinozalMonitor
+from kn import KinoMovieMonitor
+#.monmov.kinozal import KinozalMonitor
 from kn.getmov import GetMovies
 
 from kn.kinozaltv import KinozalSite
@@ -51,7 +54,8 @@ async def main():
         hours = 1
         timeout = 3600 * hours + random.randint(500, 1000)
 
-        kn = KinozalMonitor()
+        # kn = KinozalMonitor()
+        kn = KinoMovieMonitor()
         gm = GetMovies()
 
         tm = datetime.now()
@@ -116,6 +120,7 @@ async def main():
 
         print(f'main start')
         await kn.main_releases(year=cur_year)
+        await kn.hot_picks_releases(year=cur_year, years=years)
         print(f'main end')
 
         time.sleep(timeout)
@@ -127,7 +132,11 @@ async def main():
             new_month = True
 
 
-asyncio.run(test())
-asyncio.run(main())
+try:
+    asyncio.run(test())
+    asyncio.run(main())
+except Exception:
+    log_stack.error('init_stack')
+    time.sleep(120)
 
          
