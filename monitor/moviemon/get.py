@@ -19,8 +19,8 @@ async def test():
 
         await kn.kinorium_get_movies_upcoming(
             year=2023,
-            max_page=1,
-            skip_write=True
+            # max_page=1,
+            # skip_write=True
         )
 
     quit()
