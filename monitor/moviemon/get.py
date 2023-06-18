@@ -22,7 +22,7 @@ async def test():
     years = [pp_year, pre_year, cur_year, next_year]
 
     kn = KinoMovieMonitor()
-    await kn.hot_picks_releases(year=cur_year, years=years)
+    await kn.hot_picks_releases(year=cur_year, years=None)
 
     return
     for lang in ('ru', 'en', ):
