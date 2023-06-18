@@ -88,6 +88,7 @@ async def main():
 
                 await kinorium.kinorium_get_movie_premiers(
                     year=cur_year,
+                    tp=['premier', 'online', ]
                 )
 
             print(f'new day end')
