@@ -13,7 +13,7 @@ tgcrypto==1.2.5
 uvloop==0.17.0
 
 #
-django==4.2.1
+django==4.1.11
 django-admin==2.0.2
 django-extensions==3.2.1
 django-debug-toolbar==4.1.0
