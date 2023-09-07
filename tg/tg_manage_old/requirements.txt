@@ -17,7 +17,7 @@ django==4.2.1
 django-admin==2.0.2
 django-extensions==3.2.1
 django-debug-toolbar==4.1.0
-django-debugger
+django-debugger==0.6
 psycopg2==2.9.6
 django-admin-countless==0.4.0
 
