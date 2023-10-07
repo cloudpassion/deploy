@@ -22,7 +22,6 @@ tg_init()
 
 async def test():
 
-    return
     tm = datetime.now()
     cur_year = tm.year
     pre_year = cur_year - 1
