@@ -23,6 +23,28 @@ tg_init()
 async def test():
 
     return
+    tm = datetime.now()
+    cur_year = tm.year
+    pre_year = cur_year - 1
+    pp_year = pre_year - 1
+    next_year = cur_year + 1
+    for lang in ('ru', 'en', ):
+        kinorium = GetMovies(
+            kinorium_lang=lang
+        )
+
+        for tp in ['premier', 'online', ]:
+            await kinorium.kinorium_movies_premier(
+                year=cur_year,
+                type=tp
+            )
+
+        await kinorium.kinorium_get_movies_upcoming(
+            year=cur_year,
+        )
+
+    quit()
+    return
     kn = KinozalMonitor()
     await kn.top_releases(
         year='all',
@@ -90,9 +112,14 @@ async def main():
                     kinorium_lang=lang
                 )
 
-                await kinorium.kinorium_get_movie_premiers(
+                for tp in ['premier', 'online', ]:
+                    await kinorium.kinorium_movies_premier(
+                        year=cur_year,
+                        type=tp
+                    )
+
+                await kinorium.kinorium_get_movies_upcoming(
                     year=cur_year,
-                    tp=['premier', 'online', ]
                 )
 
             print(f'new day end')
