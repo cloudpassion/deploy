@@ -80,13 +80,13 @@ async def main():
         # name, limit, chat_id (*optional*)
 
         # def
-        ('sh2_chat', 128),
-        ('sh1_chat', 128),
-        ('oss_chat', 128),
-        ('sgus_chat', 128),
+        ('sh2_chat', 1024),
+        ('sh1_chat', 1024),
+        ('oss_chat', 1024),
+        ('sgus_chat', 1024),
 
-        ('shduet_channel', 64),
-        ('ukprok_channel', 64),
+        ('shduet_channel', 128),
+        ('ukprok_channel', 128),
 
         ('spb_channel', 32, settings.spb.tg.channel_id),
         ('spb_chat', 64),
